@@ -38,7 +38,9 @@ return [
     | been setup for each driver as an example of the required options.
     |
     | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
-    |
+    |i
+                    'key' => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_ACCESS_KEY'),
     */
 
     'disks' => [
@@ -57,14 +59,15 @@ return [
 
         's3' => [
 		'driver' => 's3',
-		'endpoint' => env('MINIO_ENDPOINT', 'http://127.0.0.1:9000'),
+		'region' => env('AWS_DEFAULT_REGION'),
+		'bucket' => env('AWS_BUCKET'),
+		'endpoint' => env('AWS_URL'),
 		'use_path_style_endpoint' => true,
-		'key' => env('AWS_KEY'),
-            	'secret' => env('AWS_SECRET'),
-            	'region' => env('AWS_REGION'),
-            	'bucket' => env('AWS_BUCKET'),
-            	'url' => env('AWS_URL'),
-        ],
+		'credentials' => array(
+    			'key' => env('AWS_ACCESS_KEY_ID'),
+    			'secret'  => env('AWS_SECRET_ACCESS_KEY'),)
+
+	],
 
     ],
 
