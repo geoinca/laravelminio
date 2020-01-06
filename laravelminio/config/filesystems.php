@@ -39,7 +39,7 @@ return [
     |
     | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
     |i
-                    'key' => env('AWS_ACCESS_KEY_ID'),
+                'key' => env('AWS_ACCESS_KEY_ID'),
                 'secret' => env('AWS_SECRET_ACCESS_KEY'),
     */
 
@@ -58,21 +58,21 @@ return [
         ],
 
         's3' => [
-	    'driver' => 's3',
-	    //cam Try updating your credentials to use Aws' credential object
-        'key' => env('AWS_ACCESS_KEY_ID'),
-    	'secret'  => env('AWS_SECRET_ACCESS_KEY'),
-	    //'credentials' => ['key' => env('AWS_ACCESS_KEY_ID'),
-	    //		  'secret'  => env('AWS_SECRET_ACCESS_KEY')],
-	    'region' => env('AWS_DEFAULT_REGION'),
-	    'bucket' => env('AWS_BUCKET'),
-        'url' => env('AWS_URL'),
-            // the below 'endpoint' url is actually used:
-            'endpoint' => env('AWS_URL', 'http://localhost:9000'),
-            // prevent bucket name from being added to the hostname:
-            'bucket_endpoint' => false,
-            // use older urls:
-            'use_path_style_endpoint' => true,
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'endpoint' => env('AWS_URL'),
+            'use_path_style_endpoint' => true
+        ],
+        'minio' => [
+            'driver' => 'minio',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'endpoint' => env('AWS_URL', 'http://localhost:9000')
         ]
     	
     ],

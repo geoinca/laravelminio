@@ -9,7 +9,7 @@ use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
 use Storage;
 
-class MinioStorageServiceProvider extends ServiceProvider
+class MinIOStorageServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -30,7 +30,10 @@ class MinioStorageServiceProvider extends ServiceProvider
                 'use_path_style_endpoint' => true,
                 'endpoint'    => $config["endpoint"],
             ]);
-            return new Filesystem(new AwsS3Adapter($client, $config["bucket"]));
+            $options = [
+                'override_visibility_on_copy' => true
+            ];
+            return new Filesystem(new AwsS3Adapter($client, $config["bucket"], '', $options));
         });
     }
 

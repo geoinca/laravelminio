@@ -1,7 +1,7 @@
-version: '2'
+version: '3.4'
 services:
 
-  # The Application
+  # The Application PHP Service
   app:
     build:
       context: ./
@@ -19,23 +19,52 @@ services:
       context: ./
       dockerfile: web.dockerfile
     working_dir: /var/www
-    volumes_from:
-      - app
+    volumes:
+      - ./:/var/www
     ports:
       - 80:80
-
+      - 443:443
+    external_links:
+     - database:database
+     - phpmyadmin:phpmyadmin
   # The Database
   database:
     image: mysql:5.6
+    container_name: database
+    environment:
+      - MYSQL_DATABASE=homestead
+      - MYSQL_USER=homestead
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
-    environment:
-      - "MYSQL_DATABASE=homestead"
-      - "MYSQL_USER=homestead"
-      - "MYSQL_PASSWORD=secret"
-      - "MYSQL_ROOT_PASSWORD=secret"
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
     ports:
-        - "33061:3306"
-
+      - 8080:80
+    environment:
+      - PMA_HOST=dbserver
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=secret
+    external_links:
+     - database:database      
+    volumes:
+     - "./phpmyadmin/sessions:/sessions"
+  # The minio
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./storage/minio/data:/data
+    environment:
+      MINIO_ACCESS_KEY: TCI4823FJXBK0206GOXX
+      MINIO_SECRET_KEY: xHC90qBeyZW04r+4bWf8gOn2pYGlFhfLzgcotBGn
+    command: server /data
 volumes:
   dbdata:
