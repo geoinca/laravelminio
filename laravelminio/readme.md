@@ -1,72 +1,65 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Reddit Clone
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+[English Version](#english-version)
 
-## About Laravel
+Este repositorio es parte de la serie de video tutoriales del clon de Reddit usando Laravel 5.4
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Videos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [00 / Que vamos a construir? y algunos fundamentos](https://www.youtube.com/watch?v=XrrbV5YO2PY)
+- [01 / Instalación de Composer y Laravel](https://www.youtube.com/watch?v=LQdGfYYOlLk)
+- [02 / Introducción a Rutas (Routes) y Controladores](https://www.youtube.com/watch?v=lPJEps_cz2M)
+- [03 / Vistas y creando controller de publicaciones](https://www.youtube.com/watch?v=j361I__Z9Ew)
+- [04 / Configurando la BD, creando primer migración y modelo](https://www.youtube.com/watch?v=kAfhQifkpuc)
+- [05 / Mostrando publicaciones desde la BD](https://www.youtube.com/watch?v=3inCf-wKJUI)
+- [06 / Peticiones (Request), FormRequest y Creando Publicaciones](https://www.youtube.com/watch?v=rlz8CR7jUAQ)
+- [07 / Fabrica de Modelos (Model Factory) y Paginación](https://www.youtube.com/watch?v=rodRr8Df4kM)
+- [08 / Actualizado y Borrado de Publicaciones](https://www.youtube.com/watch?v=S2CXFlk6w_o)
+- [09 / Vistas Parciales y Mensajes al realizar acciones.](https://www.youtube.com/watch?v=wmD9LsDR6Cg)
+- [10 / Autenticación de Usuario](https://www.youtube.com/watch?v=_blNwZTQ-cY&t=2s)
+- [11 / Relación entre Usuarios y Publicaciones ](https://www.youtube.com/watch?v=rjCXjNj_YGk)
+- [12 / Escribiendo los primeros Tests](https://www.youtube.com/watch?v=-Ni5z411fK4)
+- [13 / TDD y Refactoring de Código](https://www.youtube.com/watch?v=ps-1HoWNKf8)
+- [14 / Solucionando el problema Query N+1 y escribiendo más Tests](https://www.youtube.com/watch?v=uMpmg04tGL0)
+- [15 / Configurando MySQL](https://www.youtube.com/watch?v=s41qDXQFXY8)
+- ... en desarrollo
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Acerca del Autor
 
-## Learning Laravel
+Hola, mi nombre es German Popoter y soy un Ingeniero Telemático con un Máster en Ingeniería de Software. Mi meta con estos videos es poder enseñar a la mayor cantidad de personas posibles a crear aplicaciones web atravez del ejemplo.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+[Twitter @gpopoteur](https://twitter.com/gpopoteur) | [Instagram @gpopoteur](https://instagram.com/gpopoteur) | [Web gpopoteur.com](https://gpopoteur.com)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## English Version
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+This repository is the code generated in the video tutorial series where I create a Reddit Clone using Laravel 5.4, the tutorial is in Spanish.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
 
-## Contributing
+## Videos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- [00 / What are we building? and some basic knowledge](https://www.youtube.com/watch?v=XrrbV5YO2PY)
+- [01 / Installing Composer and Laravel](https://www.youtube.com/watch?v=LQdGfYYOlLk)
+- [02 / Introduction to Routes and Controllers](https://www.youtube.com/watch?v=lPJEps_cz2M)
+- [03 / Views and creating the PostsController](https://www.youtube.com/watch?v=j361I__Z9Ew)
+- [04 / Configuring the DB and creating the first migration and model](https://www.youtube.com/watch?v=kAfhQifkpuc)
+- [05 / Listing Posts from the DB](https://www.youtube.com/watch?v=3inCf-wKJUI)
+- [06 / Requests, FormRequest and Creating Posts](https://www.youtube.com/watch?v=rlz8CR7jUAQ)
+- [07 / Model Factory and Pagination](https://www.youtube.com/watch?v=rodRr8Df4kM)
+- [08 / Updating and Deleting Posts](https://www.youtube.com/watch?v=S2CXFlk6w_o)
+- [09 / View Partials and Success Messages](https://www.youtube.com/watch?v=wmD9LsDR6Cg)
+- [10 / User Authentication](https://www.youtube.com/watch?v=_blNwZTQ-cY&t=2s)
+- [11 / Users and Posts relation ](https://www.youtube.com/watch?v=rjCXjNj_YGk)
+- [12 / Writting the first tests](https://www.youtube.com/watch?v=-Ni5z411fK4)
+- [13 / TDD and code refactoring](https://www.youtube.com/watch?v=ps-1HoWNKf8)
+- [14 / Solving the N+1 query problem and writing more tests](https://www.youtube.com/watch?v=uMpmg04tGL0)
+- [15 / MySQL configuration](https://www.youtube.com/watch?v=s41qDXQFXY8)
+- ... under development
 
-## Security Vulnerabilities
+## About the Author
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Hi, my name is German Popoter, I hold a Bachelor degree in Telematic Engineering and a Masters in Software Engineering. My goal with this video tutorials is try to teach as much people as possible on how to build and create web apps through example.
 
-## License
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[Twitter @gpopoteur](https://twitter.com/gpopoteur) | [Instagram @gpopoteur](https://instagram.com/gpopoteur) | [Web gpopoteur.com](https://gpopoteur.com)
