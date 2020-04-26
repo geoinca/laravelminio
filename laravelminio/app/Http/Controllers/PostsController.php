@@ -50,7 +50,7 @@ class PostsController extends Controller
         if($post->user_id != \Auth::user()->id) {
             return redirect()->route('posts_path');
         }
-        
+
         return view('posts.edit')->with(['post' => $post]);
     }
 

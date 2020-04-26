@@ -13,6 +13,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::name('create_comment_path')->post('/posts/{post}/comments', 'PostsCommentsController@create');
 });
 
-Route::get('/', 'PostsController@index');
+Route::get('/', 'UsersController@index');
 Route::name('posts_path')->get('/posts', 'PostsController@index');
 Route::name('post_path')->get('/posts/{post}', 'PostsController@show');
