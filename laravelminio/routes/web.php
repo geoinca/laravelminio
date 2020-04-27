@@ -13,6 +13,36 @@ Route::group(['middleware' => 'auth'], function () {
     Route::name('create_comment_path')->post('/posts/{post}/comments', 'PostsCommentsController@create');
 });
 
-Route::get('/', 'UsersController@index');
+//Route::get('/', 'UsersController@index');
+Route::get('/', function () {
+
+    $s3 = new Aws\S3\S3Client([
+        'version' => 'latest',
+        'region'  => env('MINIO_REGION'),
+        'endpoint' =>  env('MINIO_ENDPOINT', 'http://127.0.0.1:9000'),
+        'use_path_style_endpoint' => true,
+        'credentials' => [
+                'key'    =>env('MINIO_KEY'),
+                'secret' =>env('MINIO_SECRET'),
+            ],
+    ]);
+    dd($s3);
+// Send a PutObject request and get the result object.
+$insert = $s3->putObject([
+    'Bucket' => 'media',
+    'Key'    => 'testkey',
+    'Body'   => 'Hello from MinIO!! we∫'
+]);
+//dd($insert );
+// Download the contents of the object.
+$retrive = $s3->getObject([
+    'Bucket' => 'media',
+    'Key'    => 'testkey',
+    'SaveAs' => 'testkey_local'
+]);
+
+});
+
+
 Route::name('posts_path')->get('/posts', 'PostsController@index');
 Route::name('post_path')->get('/posts/{post}', 'PostsController@show');
