@@ -3,7 +3,7 @@ services:
 
   #PHP Service
   app:
-    image: geoincaks/lminio.app
+    image: geoincaks/lminio.app:v1
     container_name: geoincaks.app
     restart: unless-stopped
     tty: true
@@ -18,7 +18,7 @@ services:
 
   #Nginx Service
   wserver:
-    image: geoincaks/lminio.wserver
+    image: geoincaks/lminio.wserver:v1
     container_name: geoincaks.wserver
     restart: unless-stopped
     tty: true
@@ -32,7 +32,7 @@ services:
 
   #MySQL Service
   db:
-    image: geoincaks/lminio.db
+    image: geoincaks/lminio.db:v1
     container_name: geoincaks.db
     restart: unless-stopped
     tty: true
@@ -57,7 +57,7 @@ services:
     container_name: geoincaks.phpmyadmin
     restart: always
     ports:
-            - 8088:80
+            - 3389:80
     environment:
             PMA_HOST: db
             MYSQL_ROOT_PASSWORD: secret
@@ -65,10 +65,10 @@ services:
             - app-network
 # The minio
   minio:
-    image: geoincaks/lminio.minio
+    image: geoincaks/lminio.minio:v1
     container_name: geoincaks.minio
     ports:
-      - "9000:9000"
+      - "8080:9000"
     volumes:
       - ./storage/minio/data:/data
     environment:
