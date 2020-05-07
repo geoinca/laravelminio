@@ -23,7 +23,7 @@ Route::get('/', function () {
     $s3 = new Aws\S3\S3Client([
         'version' => 'latest',
         'region'  => env('MINIO_REGION'),
-        'endpoint' =>  env('MINIO_ENDPOINT', 'http://127.0.0.1:9000'),
+        'endpoint' =>  env('MINIO_ENDPOINT', 'http://127.0.0.1:8080'),
         'use_path_style_endpoint' => true,
         'credentials' => [
                 'key'    =>env('MINIO_KEY'),
