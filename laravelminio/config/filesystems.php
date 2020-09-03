@@ -64,9 +64,9 @@ return [
         ],
         'minio' => [
             'driver' => 'minio',
-            'key' => env('MINIO_KEY', 'TCI4823FJXBK0206GOXX'),
-            'secret' => env('MINIO_SECRET', 'xHC90qBeyZW04r+4bWf8gOn2pYGlFhfLzgcotBGn'),
-            'region' => 'us-east-1',
+            'key' => env('MINIO_ACCESS_KEY', 'TCI4823FJXBK0206GOXX'),
+            'secret' => env('MINIO_SECRET_KEY', 'xHC90qBeyZW04r+4bWf8gOn2pYGlFhfLzgcotBGn'),
+            'region' => env('MINIO_DEFAULT_REGION','us-east-1'),
             'bucket' => env('MINIO_BUCKET','media'),
             'endpoint' => env('MINIO_ENDPOINT','http://minio:9000')
         ],

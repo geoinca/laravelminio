@@ -22,12 +22,12 @@ Route::get('/', function () {
     print_r($files);
     $s3 = new Aws\S3\S3Client([
         'version' => 'latest',
-        'region'  => env('MINIO_REGION'),
-        'endpoint' =>  env('MINIO_ENDPOINT', 'http://127.0.0.1:8080'),
+        'region'  => env('MINIO_DEFAULT_REGION'),
+        'endpoint' =>  env('MINIO_ENDPOINT', 'http://minio:9000'),
         'use_path_style_endpoint' => true,
         'credentials' => [
-                'key'    =>env('MINIO_KEY'),
-                'secret' =>env('MINIO_SECRET'),
+                'key'    =>env('MINIO_ACCESS_KEY'),
+                'secret' =>env('MINIO_SECRET_KEY'),
             ],
     ]);
     //
@@ -42,7 +42,7 @@ foreach ($buckets['Buckets'] as $bucket) {
 $bucket = 'media';
 
 $result=$s3->listObjects(array('Bucket'=>$bucket));
- 
+
 echo "keys retrived !\n";
 foreach ($result['Contents'] as $object){
     echo $object["Key"] . "<br>\n";

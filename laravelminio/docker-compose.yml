@@ -4,8 +4,8 @@ services:
   #PHP Service
   app:
     image: geoincaks/lminio.app:v1
-    container_name: geoincaks.app
-    restart: unless-stopped
+    container_name: app
+    restart: always
     tty: true
     environment:
       SERVICE_NAME: app
@@ -13,28 +13,28 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
   #Nginx Service
   wserver:
     image: geoincaks/lminio.wserver:v1
-    container_name: geoincaks.wserver
-    restart: unless-stopped
+    container_name: wserver
+    restart: always
     tty: true
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./:/var/www
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
   #MySQL Service
   db:
     image: geoincaks/lminio.db:v1
-    container_name: geoincaks.db
-    restart: unless-stopped
+    container_name: db
+    restart: always
     tty: true
     ports:
       - "3306:3306"
@@ -47,36 +47,36 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - dbdata:/var/lib/mysql/
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 # The phpmyadmin
   phpmyadmin:
     depends_on:
             - db
     image: phpmyadmin/phpmyadmin
-    container_name: geoincaks.phpmyadmin
+    container_name: phpmyadmin
     restart: always
     ports:
             - 3389:80
     environment:
             PMA_HOST: db
             MYSQL_ROOT_PASSWORD: secret
-    networks:
-            - app-network
+    # networks:
+    #         - app-network
 # The minio
   minio:
     image: geoincaks/lminio.minio:v1
-    container_name: geoincaks.minio
+    container_name: minio
     ports:
-      - "8080:9000"
+      - "9000:9000"
     volumes:
       - storage:/data
     environment:
       MINIO_ACCESS_KEY: TCI4823FJXBK0206GOXX
       MINIO_SECRET_KEY: xHC90qBeyZW04r+4bWf8gOn2pYGlFhfLzgcotBGn
     command: server /data
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 #Docker Networks
 networks:
   app-network:
