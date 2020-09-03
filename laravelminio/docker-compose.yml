@@ -2,33 +2,22 @@ version: '3'
 services:
 
   #PHP Service
-  app:
-    image: geoincaks/lminio.app:v1
-    container_name: app
-    restart: unless-stopped
-    tty: true
-    environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
-    working_dir: /var/www
-    volumes:
-      - ./:/var/www
-    # networks:
-    #   - app-network
-
-  #Nginx Service
-  wserver:
-    image: geoincaks/lminio.wserver:v1
-    container_name: wserver
+  php:
+    image: geoincaks/lminio.wsap:v1
+    container_name: php
     restart: unless-stopped
     tty: true
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./:/var/www
-    # networks:
-    #   - app-network
+      - 80:80
+    environment:
+      - APP_KEY="base64:qttZ/i0v0Y4XEvRopdQRMs7+rtSp9ykCTA/i6MyIaR4="
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_PORT=3306
+      - DB_HOST=db
+      - DB_DATABASE
+      - DB_USERNAME
+      - DB_PASSWORD
 
   #MySQL Service
   db:
@@ -39,14 +28,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: laravel
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    volumes:
-      - dbdata:/var/lib/mysql/
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     # networks:
     #   - app-network
 # The phpmyadmin
@@ -60,7 +45,7 @@ services:
             - 3389:80
     environment:
             PMA_HOST: db
-            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     # networks:
     #         - app-network
 # The minio
