@@ -58,8 +58,6 @@ Route::get('/', function () {
     // }
     // dd($buckets);
 
-<<<<<<< HEAD
-$result=$s3->listObjects(array('Bucket'=>$bucket));
 
 echo "keys retrived !\n";
 foreach ($result['Contents'] as $object){
@@ -77,10 +75,6 @@ foreach ($result['Contents'] as $object){
 //     echo "\n";
 // }
 // dd($buckets);
-=======
->>>>>>> 14ed7d0d54d1435f4337008496270e452cd6e88a
-
-
 
     // // Send a PutObject request and get the result object.
     // $insert = $s3->putObject([
