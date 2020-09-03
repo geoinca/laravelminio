@@ -5,7 +5,7 @@ services:
   app:
     image: geoincaks/lminio.app:v1
     container_name: app
-    restart: always
+    restart: unless-stopped
     tty: true
     environment:
       SERVICE_NAME: app
@@ -20,7 +20,7 @@ services:
   wserver:
     image: geoincaks/lminio.wserver:v1
     container_name: wserver
-    restart: always
+    restart: unless-stopped
     tty: true
     ports:
       - "80:80"
@@ -34,7 +34,7 @@ services:
   db:
     image: geoincaks/lminio.db:v1
     container_name: db
-    restart: always
+    restart: unless-stopped
     tty: true
     ports:
       - "3306:3306"
@@ -55,7 +55,7 @@ services:
             - db
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
-    restart: always
+    restart: unless-stopped
     ports:
             - 3389:80
     environment:
@@ -67,6 +67,7 @@ services:
   minio:
     image: geoincaks/lminio.minio:v1
     container_name: minio
+    restart: unless-stopped
     ports:
       - "9000:9000"
     volumes:
