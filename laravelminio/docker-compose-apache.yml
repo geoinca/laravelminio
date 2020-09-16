@@ -1,0 +1,96 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    image: geoincaks/lminio.wsap:v1
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    # networks:
+    #   - app-network
+
+  #Nginx Service
+  wserver:
+    image: geoincaks/lminio.wserver:v2
+    container_name: wserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 80:80
+    environment:
+      - APP_KEY="base64:qttZ/i0v0Y4XEvRopdQRMs7+rtSp9ykCTA/i6MyIaR4="
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_PORT=3306
+      - DB_HOST=db
+      - DB_DATABASE
+      - DB_USERNAME
+      - DB_PASSWORD
+
+  #MySQL Service
+  db:
+    #image: geoincaks/lminio.db:v1
+    image: mysql:8.0.18
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - SERVICE_TAGS: dev
+      - SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+    # networks:
+    #   - app-network
+# The phpmyadmin
+  phpmyadmin:
+    depends_on:
+            - db
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+            - 3389:80
+    environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    # networks:
+    #         - app-network
+# The minio
+  minio:
+    image: geoincaks/lminio.minio:v1
+    container_name: minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - storage:/data
+    environment:
+      MINIO_ACCESS_KEY: TCI4823FJXBK0206GOXX
+      MINIO_SECRET_KEY: xHC90qBeyZW04r+4bWf8gOn2pYGlFhfLzgcotBGn
+    command: server /data
+    # networks:
+    #   - app-network
+#Docker Networks
+# networks:
+#   app-network:
+#     driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  storage:
+    driver: local

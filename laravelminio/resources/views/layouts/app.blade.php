@@ -44,6 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('create_post_path') }}">Create Post</a></li>
+                        <li><a href="{{ route('create_fileupload_path') }}">Upload File</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -80,7 +81,7 @@
 
         <div class="container">
             @include('layouts._errors')
-        
+
             @include('layouts._messages')
 
             @yield('content')
