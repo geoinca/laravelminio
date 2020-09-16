@@ -3,7 +3,7 @@ services:
 
   #PHP Service
   app:
-    image: geoincaks/lminio.app:v1
+    image: geoincaks/lminio.app:v2
     container_name: app
     restart: unless-stopped
     tty: true
@@ -18,7 +18,7 @@ services:
 
   #Nginx Service
   wserver:
-    image: geoincaks/lminio.wserver:v1
+    image: geoincaks/lminio.wserver:v2
     container_name: wserver
     restart: unless-stopped
     tty: true
@@ -32,7 +32,9 @@ services:
 
   #MySQL Service
   db:
-    image: geoincaks/lminio.db:v1
+    #image: geoincaks/lminio.db:v1
+    image: mysql:8.0.18
+    command: --default-authentication-plugin=mysql_native_password
     container_name: db
     restart: unless-stopped
     tty: true
@@ -41,8 +43,8 @@ services:
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_USER: homestead
-      MYSQL_PASSWORD: laravel
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: rootpassword
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
@@ -60,7 +62,7 @@ services:
             - 3389:80
     environment:
             PMA_HOST: db
-            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: rootpassword
     # networks:
     #         - app-network
 # The minio
@@ -79,9 +81,9 @@ services:
     # networks:
     #   - app-network
 #Docker Networks
-networks:
-  app-network:
-    driver: bridge
+# networks:
+#   app-network:
+#     driver: bridge
 #Volumes
 volumes:
   dbdata:

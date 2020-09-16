@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Storage;
 class HomeController extends Controller
 {
     /**
@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,7 +23,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['user', 'admin']);
-        return view('home');
+       // $request->user()->authorizeRoles(['user', 'admin']);
+       $storage = Storage::disk('minio');
+       $client = $storage->getAdapter()->getClient();
+       $command = $client->getCommand('ListObjects');
+       $command['Bucket'] = $storage->getAdapter()->getBucket();
+       $command['Prefix'] = '';
+       $result = $client->execute($command);
+       return view('home')->with(['results' => $result['Contents']]);
     }
 }
