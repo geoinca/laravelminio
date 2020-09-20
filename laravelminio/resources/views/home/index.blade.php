@@ -24,10 +24,15 @@
                         @foreach($results as  $id => $value  )
                         <tr>
                             <th scope="row">     {{ $id }}    </th>
+                            <td>{{ $value["Key"] }}</td>
+                            <td>{{ $value["Size"] }}</td>
                             <td>
-                                            {{ $value["Key"] }}
+                              <form action="{{ route('download_fileupload_path') }}" method="post">
+                                    <input type="hidden"  id="filename" name="filename" value='{{ $value["Key"] }}'>
+                                    {{ csrf_field() }}
+                                    <button type="submit" class='btn btn-danger'>Download</button>
+                                </form>
                             </td>
-                            <td> {{ $value["Size"] }} </td>
                         </tr>
                         @endforeach
                         </tbody>

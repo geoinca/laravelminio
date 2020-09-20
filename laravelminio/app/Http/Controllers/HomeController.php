@@ -30,6 +30,9 @@ class HomeController extends Controller
        $command['Bucket'] = $storage->getAdapter()->getBucket();
        $command['Prefix'] = '';
        $result = $client->execute($command);
-       return view('home')->with(['results' => $result['Contents']]);
+
+
+       return view('home.index')->with(['results' => $result['Contents']]);
     }
+
 }
