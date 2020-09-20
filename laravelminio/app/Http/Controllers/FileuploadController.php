@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Storage;
 
 use App\Fileupload;
 use Illuminate\Http\Request;
@@ -22,6 +22,11 @@ class FileuploadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index(Request $request)
+    {
+        //$request->user()->authorizeRoles(['user', 'admin']);
+        return view('fileupload.index');
+    }
     public function create(Request $request)
     {
         //$request->user()->authorizeRoles(['user', 'admin']);
@@ -38,13 +43,42 @@ class FileuploadController extends Controller
     public function store(Request $request)
     {
         //
-        $fileName = time().'.'.$request->name;
 
-        $request->objectup->store('media','minio');
+        $file = $request->file('objectup');
+        $name=time().$file->getClientOriginalName();
+        $filePath = '/' . $name;
+        Storage::disk('minio')->put($filePath, file_get_contents($file));
 
-        return back()
-            ->with('success','You have successfully upload file.')
-            ->with('file',$fileName);
+        $txtmsg= $name.' Upload!';
+        session()->flash('message', $name.' Upload!');
+        return redirect('/');
+    }
+
+    public function download(Request $request){
+        $filename = $request->input('filename');
+        $exists = Storage::disk('minio')->exists($filename );
+        if($exists){
+            $mime = Storage::disk('minio')->getDriver()->getMimetype($filename);
+            $size = Storage::disk('minio')->getDriver()->getSize($filename);
+            $headers =  [
+                'Content-Type' => $mime,
+                'Content-Length' => $size,
+                'Content-Description' => 'File Transfer',
+                'Content-Disposition' => "attachment; filename={$filename}",
+                'Content-Transfer-Encoding' => 'binary',
+              ];
+
+              //ob_end_clean();
+              return   \Response::make(Storage::disk('minio')->get($filename), 200, $headers);
+        }
+        else{
+            dd($exists);
+        }
+   //$file = Storage::disk('minio')->get($filename );
+
+
+
+
     }
 
     /**
