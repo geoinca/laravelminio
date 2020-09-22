@@ -9,7 +9,7 @@
     </div>
     <div class="form-group">
         <label for="objectup">Choose Object</label>
-        <input id="objectup" type="file" name="objectup">
+        <input type="file"  id="objectup" name="objectup">
     </div>
     <button type="submit" class="btn btn-dark d-block w-75 mx-auto">Upload</button>
 </form>
