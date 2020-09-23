@@ -14,7 +14,7 @@ class UploadfileSeeder extends Seeder
 
         $s3 = new Aws\S3\S3Client([
             'version' => 'latest',
-            'region'  => env('MINIO_DEFAULT_REGION'),
+            'region'  => env('MINIO_DEFAULT_REGION','us-east-1'),
             'endpoint' =>  env('MINIO_ENDPOINT', 'http://minio:9000'),
             'use_path_style_endpoint' => true,
             'credentials' => [
