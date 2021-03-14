@@ -21,7 +21,7 @@
                         </thead>
                         <tbody>
 
-                        @foreach($results as  $id => $value  )
+                        @forelse($results as  $id => $value  )
                         <tr>
                             <th scope="row">     {{ $id }}    </th>
                             <td>{{ $value["Key"] }}</td>
@@ -34,7 +34,9 @@
                                 </form>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <p>No data</p>
+                        @endforelse
                         </tbody>
                     </table>
                 <p></p>
