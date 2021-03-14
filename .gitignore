@@ -16,3 +16,4 @@ cosas.txt
 *.DS_Store*
 bootstrap/cache/*
 yarn.lock
+composer.lock
