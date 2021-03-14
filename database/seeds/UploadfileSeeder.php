@@ -14,12 +14,12 @@ class UploadfileSeeder extends Seeder
 
         $s3 = new Aws\S3\S3Client([
             'version' => 'latest',
-            'region'  => env('MINIO_DEFAULT_REGION','us-east-1'),
-            'endpoint' =>  env('MINIO_ENDPOINT', 'http://minio:9000'),
+            'region'  => env('MINIO_DEFAULT_REGION'),
+            'endpoint' =>  env('MINIO_ENDPOINT'),
             'use_path_style_endpoint' => true,
             'credentials' => [
-                    'key'    =>env('MINIO_ACCESS_KEY','TCI4823FJXBK0206GOXX'),
-                    'secret' =>env('MINIO_SECRET_KEY','xHC90qBeyZW04r+4bWf8gOn2pYGlFhfLzgcotBGn'),
+                    'key'    =>env('MINIO_ACCESS_KEY'),
+                    'secret' =>env('MINIO_SECRET_KEY'),
                 ],
             ]);
         $bucketName = 'media';
