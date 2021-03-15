@@ -43,13 +43,16 @@ class FileuploadController extends Controller
     public function store(Request $request)
     {
         //
+        $imageNameArr = [];
+        foreach ($request->objectup as $file) {
+            //$file = $request->file('objectup');
+            $name=time().$file->getClientOriginalName();
+            $imageNameArr[] = $name;
+            $filePath = '/' . $name;
+            Storage::disk('minio')->put($filePath, file_get_contents($file));
 
-        $file = $request->file('objectup');
-        $name=time().$file->getClientOriginalName();
-        $filePath = '/' . $name;
-        Storage::disk('minio')->put($filePath, file_get_contents($file));
-
-        $txtmsg= $name.' Upload!';
+            //$txtmsg= $name.' Upload!';
+        }    
         session()->flash('message', $name.' Upload!');
         return redirect('/');
     }

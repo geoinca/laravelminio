@@ -20,8 +20,8 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                        @forelse($results as  $id => $value  )
+                        @if (is_array($results) )
+                        @foreach($results as  $id => $value  )
                         <tr>
                             <th scope="row">     {{ $id }}    </th>
                             <td>{{ $value["Key"] }}</td>
@@ -34,9 +34,12 @@
                                 </form>
                             </td>
                         </tr>
-                        @empty
-                            <p>No data</p>
-                        @endforelse
+                       
+                            
+                        @endforeach
+                        @else
+                            <tr> no hay datos                             </tr>
+                        @endif
                         </tbody>
                     </table>
                 <p></p>
