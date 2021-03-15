@@ -25,12 +25,13 @@ class HomeController extends Controller
     {
        // $request->user()->authorizeRoles(['user', 'admin']);
        $storage = Storage::disk('minio');
+       
        $client = $storage->getAdapter()->getClient();
        $command = $client->getCommand('ListObjects');
        $command['Bucket'] = $storage->getAdapter()->getBucket();
        $command['Prefix'] = '';
        $result = $client->execute($command);
-
+       //dd($result);
 
        return view('home.index')->with(['results' => $result['Contents']]);
     }

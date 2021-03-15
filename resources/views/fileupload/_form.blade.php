@@ -29,9 +29,9 @@
         {{--<label for="name">File Name</label>--}}
        
     </div>
-    <div class="form-group">
+    <div class="input-group-addon-objectup00">
         <label for="objectup">Choose Object</label>
-        <input type="file" class="form-control" name="objectup[]" multiple>
+        <input type="file" id="objectup" class="" name="objectup[]" multiple>
     </div>
-    <button type="submit" class="btn btn-dark d-block w-75 mx-auto">Upload</button>
+    <button type="submit" class="btn btn-primary w-75 mx-auto">Upload</button>
 </form>
