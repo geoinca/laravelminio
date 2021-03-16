@@ -17,3 +17,5 @@ cosas.txt
 bootstrap/cache/*
 yarn.lock
 composer.lock
+package-lock.json
+
