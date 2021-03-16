@@ -43,8 +43,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li><a href="{{ route('posts_path') }}">home post</a></li>
                         <li><a href="{{ route('create_post_path') }}">Create Post</a></li>
+                        <li><a href="{{ route('fileupload_path') }}">home Upload</a></li>
                         <li><a href="{{ route('create_fileupload_path') }}">Upload File</a></li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->

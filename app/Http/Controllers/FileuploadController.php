@@ -15,7 +15,7 @@ class FileuploadController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -25,12 +25,22 @@ class FileuploadController extends Controller
     public function index(Request $request)
     {
         //$request->user()->authorizeRoles(['user', 'admin']);
-        return view('fileupload.index');
+        $storage = Storage::disk('minio');
+       
+        $client = $storage->getAdapter()->getClient();
+        $command = $client->getCommand('ListObjects');
+        $command['Bucket'] = $storage->getAdapter()->getBucket();
+        //$command['Prefix'] = 'id' . $request->user()->id . '/';
+        $result = $client->execute($command);
+        //;$request->user()->id
+
+        return view('fileupload.index')->with(['results' => $result['Contents']]);
     }
     public function create(Request $request)
     {
         //$request->user()->authorizeRoles(['user', 'admin']);
-        return view('fileupload.index');
+        //dd("dfg");
+        return view('fileupload.create');
     }
 
 
@@ -42,19 +52,20 @@ class FileuploadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         $imageNameArr = [];
         foreach ($request->objectup as $file) {
             //$file = $request->file('objectup');
             $name=time().$file->getClientOriginalName();
             $imageNameArr[] = $name;
-            $filePath = '/' . $name;
+            $filePath = '/' . 'id' . $request->user()->id. '/' . $name;
             Storage::disk('minio')->put($filePath, file_get_contents($file));
 
             //$txtmsg= $name.' Upload!';
         }    
         session()->flash('message', $name.' Upload!');
-        return redirect('/');
+        //return redirect('/');
+        return redirect()->route('fileupload_path');
     }
 
     public function download(Request $request){

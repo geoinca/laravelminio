@@ -24,15 +24,15 @@ class HomeController extends Controller
     public function index(Request $request)
     {
        // $request->user()->authorizeRoles(['user', 'admin']);
-       $storage = Storage::disk('minio');
+    //    $storage = Storage::disk('minio');
        
-       $client = $storage->getAdapter()->getClient();
-       $command = $client->getCommand('ListObjects');
-       $command['Bucket'] = $storage->getAdapter()->getBucket();
-       $command['Prefix'] = '';
-       $result = $client->execute($command);
+    //    $client = $storage->getAdapter()->getClient();
+    //    $command = $client->getCommand('ListObjects');
+    //    $command['Bucket'] = $storage->getAdapter()->getBucket();
+    //    $command['Prefix'] = $request->user()->id;
+    //    $result = $client->execute($command);
        //dd($result);
-
+       $result['Contents']=[];
        return view('home.index')->with(['results' => $result['Contents']]);
     }
 
