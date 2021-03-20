@@ -58,11 +58,14 @@ class FileuploadController extends Controller
             //$file = $request->file('objectup');
             $name=time().$file->getClientOriginalName();
             $imageNameArr[] = $name;
-            $filePath = '/' . 'id' . $request->user()->id. '/' . $name;
+            //$filePath = '/' . 'id' . $request->user()->id. '/' . $name;
+            $filePath = '/' . $name;
             Storage::disk('minio')->put($filePath, file_get_contents($file));
 
             //$txtmsg= $name.' Upload!';
-        }    
+        }
+        exec("/usr/bin/argo submit --watch -n argo  https://raw.githubusercontent.com/geoinca/miniok/main/argo/hello-world10.yaml        ", );
+    
         session()->flash('message', $name.' Upload!');
         //return redirect('/');
         return redirect()->route('fileupload_path');
